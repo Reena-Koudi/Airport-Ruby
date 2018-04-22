@@ -10,6 +10,7 @@ class Airport
   end
 
   def land(plane)
+    raise 'Landing cancelled due to bad weather' if weather.stormy?
     @hangar.push(plane)
   end
 
