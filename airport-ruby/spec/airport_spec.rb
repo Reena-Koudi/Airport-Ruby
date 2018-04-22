@@ -9,4 +9,11 @@ describe Airport do
       expect(airport.land(plane)).to eq(plane)
     end
   end
+
+  describe '#take_off' do
+    it 'instructs the plane to take-off' do
+      airport.land(plane)
+      expect(airport.take_off(plane)).not_to eq(plane)
+    end
+  end
 end
