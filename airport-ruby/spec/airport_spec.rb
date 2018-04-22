@@ -16,6 +16,11 @@ describe Airport do
       it 'instructs the plane to land' do
         expect(airport.land(plane1)).to eq([plane1])
       end
+
+      it 'Prevent landing when airport is full' do
+        Airport::DEFAULT_CAPACITY.times { airport.land(plane1) }
+        expect{ airport.land(plane2) }.to raise_error 'Airport capacity is full'
+      end
     end
 
     context '#take_off' do
