@@ -19,7 +19,13 @@ class Airport
 
   def take_off(plane)
     raise 'Take_off cancelled due to bad weather' if weather.stormy?
+    raise 'Sorry the plane is already flying' if flying?(plane)
     @hangar.delete(plane)
     @hangar
+  end
+
+  private
+  def flying?(plane)
+    !@hangar.include?(plane)
   end
 end

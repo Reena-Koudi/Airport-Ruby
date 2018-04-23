@@ -34,6 +34,12 @@ describe Airport do
         airport.land(plane2)
         expect(airport.take_off(plane1)).to eq([plane2])
       end
+
+      it 'Cannot take_off the plane which is already flying' do
+        airport.land(plane1)
+        airport.take_off(plane1)
+        expect{ airport.take_off(plane1) }.to raise_error 'Sorry the plane is already flying'
+      end
     end
 
   end
