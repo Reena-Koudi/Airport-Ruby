@@ -18,8 +18,14 @@ describe Airport do
       end
 
       it 'Prevent landing when airport is full' do
-        Airport::DEFAULT_CAPACITY.times { airport.land(plane1) }
+        airport.capacity = 1
+        airport.land(plane1)
         expect{ airport.land(plane2) }.to raise_error 'Airport capacity is full'
+      end
+
+      it 'Cannot land the plane which is already in hangar' do
+        airport.land(plane1)
+        expect { airport.land(plane1) }.to raise_error 'Sorry the plane is already in hangar'
       end
     end
 

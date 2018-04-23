@@ -3,6 +3,7 @@ require_relative 'weather'
 
 class Airport
   attr_reader :weather
+  attr_accessor :capacity, :hangar
   DEFAULT_CAPACITY = 20
 
   def initialize(capacity = DEFAULT_CAPACITY)
@@ -13,7 +14,8 @@ class Airport
 
   def land(plane)
     raise 'Landing cancelled due to bad weather' if weather.stormy?
-    raise 'Airport capacity is full' if @hangar.length == DEFAULT_CAPACITY
+    raise 'Airport capacity is full' if @hangar.length == @capacity
+    raise 'Sorry the plane is already in hangar' if flying?(plane) == false
     @hangar.push(plane)
   end
 
