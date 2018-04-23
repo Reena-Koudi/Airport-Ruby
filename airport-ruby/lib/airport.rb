@@ -8,19 +8,18 @@ class Airport
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @hangar = []
-    @weather = Weather.new
     @capacity = capacity
   end
 
-  def land(plane)
-    raise 'Landing cancelled due to bad weather' if weather.stormy?
+  def land(plane, weather)
+    raise 'Landing cancelled due to bad weather' if weather == :stormy
     raise 'Airport capacity is full' if @hangar.length == @capacity
     raise 'Sorry the plane is already in hangar' if flying?(plane) == false
     @hangar.push(plane)
   end
 
-  def take_off(plane)
-    raise 'Take_off cancelled due to bad weather' if weather.stormy?
+  def take_off(plane, weather)
+    raise 'Take_off cancelled due to bad weather' if weather == :stormy
     raise 'Sorry the plane is already flying' if flying?(plane)
     @hangar.delete(plane)
     @hangar
